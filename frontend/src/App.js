@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Board from "./components/Board/Board";
+import CreateUserPage from "./components/CreateUserPage/CreateUserPage";
 
 function App() {
   return (
@@ -17,7 +18,7 @@ function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Board />}></Route>
-            {/* <Route path="/login" element={<SingIn />}></Route> */}
+            <Route path="/create-user" element={<CreateUserPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
