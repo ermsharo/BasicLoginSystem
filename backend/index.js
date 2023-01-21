@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 // const userRoutes = require("./routes/user");
 // const freeDict  = require("./routes/freeDict");
 
+
 // const db = require("./database/connection");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -26,13 +27,13 @@ app.get("/", (req, res) => {
 
 //Database connection
 
-db.authenticate()
-    .then(() => {
-        console.log("Database connected");
-    })
-    .catch((err) => {
-        console.log("DB connection error :", err);
-    });
+// db.authenticate()
+//     .then(() => {
+//         console.log("Database connected");
+//     })
+//     .catch((err) => {
+//         console.log("DB connection error :", err);
+//     });
 
 //Routes
 // app.use(authRoutes);
