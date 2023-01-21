@@ -1,48 +1,40 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ProductCard from "../ProductCard/ProductCard";
 
-const BoardBox = styled.div`
+const DisplayArea = styled.div`
   padding-top: 32px;
+  width: 60vw;
+  margin: auto;
+`;
+
+const ProductsArea = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 32px;
 `;
 
 export default function Board() {
-  const [selectedWord, setSelectedWord] = useState(null);
-  const [wordsRequests, setWordsRequests] = useState({});
-  const [infoDrawerOpen, setInfoDrawerOpen] = useState(false);
+  //Just insert random products
+  let products = [];
 
-  const [windowSize, setWindowSize] = useState({
-    width: undefined,
-    height: undefined,
-  });
-
-  const [isMobile, setIsMobile] = useState(false);
-
-  const handleResize = () => {
-    setWindowSize({
-      width: window.innerWidth,
-      height: window.innerHeight,
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    if (0 < windowSize.width && windowSize.width < 992) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-
-    return () => window.removeEventListener("resize", handleResize);
-  }, [windowSize.width]);
-
-  let { tab } = useParams();
+  for (let i = 0; i < 12; i++) {
+    products.push([]);
+  }
 
   return (
-    <>
-      <BoardBox>produtos vem aqui</BoardBox>
-    </>
+    <DisplayArea>
+      <ProductsArea>
+        {products.map(function (item, index) {
+          console.log("test");
+          return (
+            <div key={index}>
+              <ProductCard />
+            </div>
+          );
+        })}
+      </ProductsArea>
+    </DisplayArea>
   );
 }
