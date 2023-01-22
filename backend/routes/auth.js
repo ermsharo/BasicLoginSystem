@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 require("dotenv-safe").config();
 
 const jwt = require("jsonwebtoken");
-const User = require("../models/userinfo");
+const User = require("../models/user");
 
 router.post("/auth/singup", async (req, res) => {
   console.log("sing up")

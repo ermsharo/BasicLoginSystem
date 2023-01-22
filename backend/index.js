@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-// const authRoute = require("./routes/auth");
+const authRoute = require("./routes/auth");
 // const productsRoute = require("./routes/products");
 
 
@@ -36,7 +36,7 @@ db.authenticate()
     });
 
 //Routes
-// app.use(authRoute);
+ app.use(authRoute);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);
