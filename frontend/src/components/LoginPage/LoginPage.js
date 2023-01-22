@@ -84,7 +84,6 @@ export default function SingIn() {
   };
 
   const singIn = async () => {
-    console.log("sing in")
     await axios
       .post("http://localhost:5000/auth/singin", {
         formInputs,
@@ -92,11 +91,9 @@ export default function SingIn() {
       .then((response) => {
         setRequestErrorAwnser(false);
         saveUserInfo(response.data.id, response.data.token, response.data.name);
-        console.log("deu certo")
         navigate("/");
       })
       .catch((error) => {
-        console.log(error.response.data);
         setRequestErrorAwnser(error.response.data);
       });
   };

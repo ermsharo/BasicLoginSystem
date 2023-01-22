@@ -74,7 +74,6 @@ export default function CreateUser() {
   }
 
   const createUser = async () => {
-    console.log("->", isCreateUserFormValid(formInputs));
     if (isCreateUserFormValid(formInputs)) {
       await axios
         .post("http://localhost:5000/auth/singup", {

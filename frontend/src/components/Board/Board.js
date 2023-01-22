@@ -27,7 +27,6 @@ export default function Board() {
   if (isLoading) return <div>LOADING</div>;
 
   if (data) {
-
     return (
       <DisplayArea>
         <h1>Products</h1>
