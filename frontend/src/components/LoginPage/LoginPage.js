@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import { Grid } from "../../Styles/GridSystem";
+import { Grid } from "../../Styles/Styles";
 import Button from "@mui/material/Button";
 import React, { useState } from "react";
 import Feedback from "./../Feedback/FeedBack";
