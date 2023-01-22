@@ -38,6 +38,7 @@ export default function Board() {
 
     return (
       <DisplayArea>
+        <h1>Products</h1>
         <ProductsArea>
           {data.map(function (item, index) {
             return (

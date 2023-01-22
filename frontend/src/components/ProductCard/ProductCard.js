@@ -1,38 +1,27 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
-import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 import styled from "styled-components";
 
-const CardBox = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 32px;
+const CardStructure = styled.div`
+  height: 450px;
+
+  border-radius: 15px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  h2 {
+    padding: 16px;
+  }
+  h3 {
+    text-align: left;
+    padding: 16px;
+  }
 `;
 
-export default function ProductCard({name, description, image, price}) {
+export default function ProductCard({ name, image, price }) {
   return (
-    <Card>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={image}
-        title={name}
-      />
-      <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {name}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {description}
-        </Typography>
-      </CardContent>
-      <CardActions>
-      <Typography gutterBottom variant="h6" component="div">
-      R$ {price}
-        </Typography>
-      </CardActions>
-    </Card>
+    <CardStructure>
+      <CardMedia sx={{ height: 220 }} image={image} title={name} />
+      <h2>{name}</h2>
+      <h3>R${Math.ceil(price, 2)},00</h3>
+    </CardStructure>
   );
 }
