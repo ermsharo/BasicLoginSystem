@@ -3,7 +3,6 @@ export const isCreateUserFormValid = (formInputs) => {
     return /\S+@\S+\.\S+/.test(email);
   };
 
-  console.log("Form inputs", formInputs);
   let formErrors = [];
   if (!formInputs.user) {
     formErrors.push("You need to fill the user field ");

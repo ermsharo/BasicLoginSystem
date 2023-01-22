@@ -17,11 +17,8 @@ const ProductsArea = styled.div`
 `;
 
 export default function Board() {
-  //Just insert random products
   const navigate = useNavigate();
-
   const { data, isLoading, isError } = GetProducts();
-
   if (isError) {
     if (isError.auth === false) navigate("/login");
     return <div>Something went wrong ...</div>;
@@ -30,12 +27,6 @@ export default function Board() {
   if (isLoading) return <div>LOADING</div>;
 
   if (data) {
-    let products = [];
-
-    for (let i = 0; i < 12; i++) {
-      products.push([]);
-    }
-
     return (
       <DisplayArea>
         <h1>Products</h1>
