@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 
 
-export const CreateUser = async (isFormValid, userInputs) => {
+ const createUser = async (isFormValid, userInputs) => {
 
     const navigate = useNavigate();
     const [requestErrorAwnser, setRequestErrorAwnser] = useState(false);
@@ -23,4 +23,6 @@ export const CreateUser = async (isFormValid, userInputs) => {
                 setRequestErrorAwnser(error.response.data);
             });
     }
+
+
 };

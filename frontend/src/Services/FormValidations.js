@@ -1,5 +1,5 @@
 
-  const ValidadeInputs = (formInputs) => {
+  export const isCreateUserFormValid = (formInputs) => {
 
     const isValidEmail =(email)=> {
         return /\S+@\S+\.\S+/.test(email);

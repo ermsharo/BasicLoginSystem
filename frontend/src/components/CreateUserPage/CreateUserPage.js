@@ -6,6 +6,7 @@ import React, { useState } from "react";
 import Feedback from "./../Feedback/FeedBack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {isCreateUserFormValid} from "./../../Services/FormValidations";
 
 const BoardBox = styled.div`
   padding-top: 32px;
@@ -54,8 +55,9 @@ export default function CreateUser() {
     password: "",
     passwordCheck: "",
   });
+
   const [requestErrorAwnser, setRequestErrorAwnser] = useState(false);
-  // const [requestAwnser, setRequestAwnser] = useState(false);
+  const [requestAwnser, setRequestAwnser] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     isFormValid: true,
     errorArray: [],
@@ -71,60 +73,24 @@ export default function CreateUser() {
     });
   }
 
-  function isValidEmail(email) {
-    return /\S+@\S+\.\S+/.test(email);
-  }
 
-  const validadeInputs = () => {
-    console.log("Form inputs", formInputs);
-    let formErrors = [];
-    if (!formInputs.user) {
-      formErrors.push("You need to fill the user field ");
-    }
-    if (!formInputs.password) {
-      formErrors.push("You need to fill the password field ");
-    }
-    if (!formInputs.passwordCheck) {
-      formErrors.push("You need to fill the password check field ");
-    }
-    if (!formInputs.email) {
-      formErrors.push("You need to fill the email field ");
-    }
 
-    if (!isValidEmail(formInputs.email)) {
-      formErrors.push("Invalid email format");
-    }
-
-    if (
-      formInputs.password &&
-      formInputs.passwordCheck &&
-      formInputs.password !== formInputs.passwordCheck
-    ) {
-      formErrors.push("Password check must be equals to Password ");
-    }
-
-    if (formErrors.length === 0) {
-      setValidationErrors({ isFormValid: true, errorArray: [] });
-    }
-    setValidationErrors({ isFormValid: false, errorArray: formErrors });
-  };
 
   const createUser = async () => {
-    console.log(validadeInputs());
-
-    if (validationErrors.isFormValid) {
+    if (isCreateUserFormValid(formInputs)) {
       await axios
         .post("http://localhost:5000/auth/singup", {
           formInputs,
         })
         .then((response) => {
-          // setRequestAwnser(response.data);
+          setRequestAwnser(response.data);
           navigate("/");
         })
         .catch((error) => {
           setRequestErrorAwnser(error.response.data);
         });
     }
+
   };
 
   return (
