@@ -16,11 +16,10 @@ RUN npm install
 
 # add app
 COPY . ./
-
-RUN npm install --save-dev sequelize-cli
+RUN npm install -g sequelize-cli
 RUN npx sequelize-cli model:generate --name User --attributes id:string,userName:string,email:string,password:string --force
 RUN npx sequelize-cli model:generate --name Product --attributes id:string,name:string,price:string --force
-
+RUN npx sequelize-cli db:migrate
 
 
 

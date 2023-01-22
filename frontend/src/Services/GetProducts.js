@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-// import { getToken } from "../Services/getLoginStatus";
+import { getToken } from "../Services/StorageManagement";
 
 export  default function GetProducts()  {
   const [data, setData] = useState(null);
@@ -16,7 +16,7 @@ export  default function GetProducts()  {
           `http://localhost:5000/products`,
           {
             headers: {
-            //   "x-access-token": getToken(),
+           "x-access-token": getToken(),
             },
           }
         );
