@@ -1,9 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-// const authRoutes = require("./routes/auth");
-// const entriesRoutes = require("./routes/entries");
-// const userRoutes = require("./routes/user");
-// const freeDict  = require("./routes/freeDict");
 
 
 const db = require("./database/connection");
@@ -21,19 +17,19 @@ app.use(jsonParser);
 app.use(cors());
 app.get("/", (req, res) => {
     res.send({
-        message: "Fullstack Challenge 🏅 - Dictionary",
+        message: "Teste Nex Digital 🏅 ",
     });
 });
 
 //Database connection
 
-// db.authenticate()
-//     .then(() => {
-//         console.log("Database connected");
-//     })
-//     .catch((err) => {
-//         console.log("DB connection error :", err);
-//     });
+db.authenticate()
+    .then(() => {
+        console.log("Database connected");
+    })
+    .catch((err) => {
+        console.log("DB connection error :", err);
+    });
 
 //Routes
 // app.use(authRoutes);
