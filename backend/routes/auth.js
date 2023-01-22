@@ -3,19 +3,14 @@ const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 const User = require("../instances/userInstance");
-const crypto = require('crypto');
+const crypto = require("crypto");
 
 require("dotenv-safe").config();
 
 const jwt = require("jsonwebtoken");
 
-
-
 router.post("/auth/singup", async (req, res) => {
-  console.log("sing up")
   const { user, email, password, passwordCheck } = req.body.formInputs;
-  console.log(` user ${user} \n email ${email}`)
-
 
   if (!(email && password && user && passwordCheck)) {
     return res.status(400).send("Form data is missing");
@@ -31,12 +26,11 @@ router.post("/auth/singup", async (req, res) => {
     if (getEmailByEmailtext === null) {
       encryptedPassword = await bcrypt.hash(password, 10);
       const userCreated = await User.create({
-        id: crypto.randomBytes(16).toString('hex'),
+        id: crypto.randomBytes(16).toString("hex"),
         userName: user,
         email: email.toLowerCase(),
         password: encryptedPassword,
       });
-
 
       return res.status(200).send("User susseful created");
     } else {
@@ -49,11 +43,7 @@ router.post("/auth/singup", async (req, res) => {
   }
 });
 
-
-
-
 router.post("/auth/singin", async (req, res) => {
-
   const { email, password } = req.body.formInputs;
   const getUserByMail = await User.findOne({ where: { email: email } });
   const userByMail = getUserByMail.dataValues;

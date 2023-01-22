@@ -16,7 +16,6 @@ const Products = database.define("Product", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-
 });
 
 module.exports = Products;
