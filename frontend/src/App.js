@@ -1,6 +1,4 @@
-// import Board from "./components/board/board";
-// import SingIn from "./components/singIn/singin";
-// import CreateUser from "./components/createUser/CreateUser";
+
 import Header from "./components/Header/Header";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
@@ -15,7 +13,7 @@ function App() {
       <Helmet></Helmet>
 
       <div>
-      <BrowserRouter>
+        <BrowserRouter>
           <Header />
           <Routes>
             <Route path="/" element={<Board />}></Route>
