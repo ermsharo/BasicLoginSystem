@@ -12,6 +12,7 @@ router.post("/auth/singup", async (req, res) => {
   const { user, email, password, passwordCheck } = req.body.formInputs;
   console.log(` user ${user} \n email ${email}`)
 
+
   if (!(email && password && user && passwordCheck)) {
     return res.status(400).send("Form data is missing");
   }
