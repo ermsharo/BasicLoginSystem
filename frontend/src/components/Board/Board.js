@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import React, {  } from "react";
+import React from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import GetProducts from "../../Services/GetProducts";
 import { useNavigate } from "react-router-dom";
@@ -22,13 +22,12 @@ export default function Board() {
 
   const { data, isLoading, isError } = GetProducts();
 
-
   if (isError) {
     if (isError.auth === false) navigate("/login");
     return <div>Something went wrong ...</div>;
   }
 
-  if (isLoading) return (<div>LOADING</div>)
+  if (isLoading) return <div>LOADING</div>;
 
   if (data) {
     let products = [];
@@ -43,10 +42,12 @@ export default function Board() {
           {data.map(function (item, index) {
             return (
               <div key={index}>
-                <ProductCard name={item.title}
+                <ProductCard
+                  name={item.title}
                   description={item.description}
                   image={item.image}
-                  price={item.price} />
+                  price={item.price}
+                />
               </div>
             );
           })}
