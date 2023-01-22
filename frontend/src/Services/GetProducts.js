@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getToken } from "../Services/StorageManagement";
 
-export  default function GetProducts()  {
+export default function GetProducts() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -12,14 +12,11 @@ export  default function GetProducts()  {
       setIsError(false);
       setIsLoading(true);
       try {
-        const result = await axios(
-          `http://localhost:5000/products`,
-          {
-            headers: {
-           "x-access-token": getToken(),
-            },
-          }
-        );
+        const result = await axios(`http://localhost:5000/products`, {
+          headers: {
+            "x-access-token": getToken(),
+          },
+        });
 
         setData(result.data);
       } catch (error) {
@@ -33,4 +30,4 @@ export  default function GetProducts()  {
   }, []);
 
   return { data, isLoading, isError };
-};
+}
