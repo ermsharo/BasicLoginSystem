@@ -5,7 +5,7 @@ const bcrypt = require("bcrypt");
 require("dotenv-safe").config();
 
 const jwt = require("jsonwebtoken");
-const userinfo = require('./../models/userinfo');
+const User = require("../models/userinfo");
 
 router.post("/auth/singup", async (req, res) => {
   console.log("sing up")
@@ -20,13 +20,13 @@ router.post("/auth/singup", async (req, res) => {
   if (password != passwordCheck)
     return res.status(400).send("Password check is diferent from password");
 
-  const getUserByUsername = await userinfo.findOne({ where: { userName: user } });
+  const getUserByUsername = await User.findOne({ where: { userName: user } });
   if (getUserByUsername === null) {
     //This username is free for use
-    const getEmailByEmailtext = await userinfo.findOne({ where: { email: email } });
+    const getEmailByEmailtext = await User.findOne({ where: { email: email } });
     if (getEmailByEmailtext === null) {
       encryptedPassword = await bcrypt.hash(password, 10);
-      const userCreated = await userinfo.create({
+      const userCreated = await User.create({
         userName: user,
         email: email.toLowerCase(),
         password: encryptedPassword,
@@ -43,6 +43,7 @@ router.post("/auth/singup", async (req, res) => {
     return res.status(400).send("Alredy exist a account with this username");
   }
 });
+
 
 
 
