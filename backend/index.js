@@ -1,7 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const auth = require("./routes/auth");
-const products = require("./routes/products");
+const authRoute = require("./routes/auth");
+const productsRoute = require("./routes/products");
 
 const db = require("./connection");
 const cors = require("cors");
@@ -36,9 +36,6 @@ db.authenticate()
 
 //Routes
 app.use(authRoute);
-// app.use(entriesRoutes);
-// app.use(userRoutes);
-// app.use(freeDict);
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

@@ -1,14 +1,16 @@
 const { Op } = require("sequelize");
 const express = require("express");
-const User = require("../models/User");
 const router = express.Router();
 const bcrypt = require("bcrypt");
 require("dotenv-safe").config();
 
 const jwt = require("jsonwebtoken");
+const userinfo = require('./../models/userinfo');
 
 router.post("/auth/singup", async (req, res) => {
+  console.log("sing up")
   const { user, email, password, passwordCheck } = req.body.formInputs;
+  console.log(` user ${user} \n email ${email}`)
 
   if (!(email && password && user && passwordCheck)) {
     return res.status(400).send("Form data is missing");
@@ -17,13 +19,13 @@ router.post("/auth/singup", async (req, res) => {
   if (password != passwordCheck)
     return res.status(400).send("Password check is diferent from password");
 
-  const getUserByUsername = await User.findOne({ where: { userName: user } });
+  const getUserByUsername = await userinfo.findOne({ where: { userName: user } });
   if (getUserByUsername === null) {
     //This username is free for use
-    const getEmailByEmailtext = await User.findOne({ where: { email: email } });
+    const getEmailByEmailtext = await userinfo.findOne({ where: { email: email } });
     if (getEmailByEmailtext === null) {
       encryptedPassword = await bcrypt.hash(password, 10);
-      const userCreated = await User.create({
+      const userCreated = await userinfo.create({
         userName: user,
         email: email.toLowerCase(),
         password: encryptedPassword,
