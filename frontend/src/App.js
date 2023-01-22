@@ -15,19 +15,15 @@ function App() {
       <Helmet></Helmet>
 
       <div>
-        <BrowserRouter>
+      <BrowserRouter>
           <Header />
           <Routes>
+            <Route path="/" element={<Board />}></Route>
+            <Route path="/login" element={<LoginPage />}></Route>
             <Route
-              path="/"
-              element={
-                <>
-                  <CreateUserPage />
-                  <LoginPage />
-                </>
-              }
+              path="/login/create-account"
+              element={<CreateUserPage />}
             ></Route>
-            <Route path="/create-user" element={<CreateUserPage />}></Route>
           </Routes>
         </BrowserRouter>
       </div>
