@@ -1,15 +1,15 @@
-const { Op } = require("sequelize");
+
 const express = require("express");
-const User = require("../models/userinfo");
 const router = express.Router();
-const bcrypt = require("bcrypt");
 require("dotenv-safe").config();
-
-
+const fs = require("fs");
+const file_content = fs.readFileSync('assets/products.json');
+const products = JSON.parse(file_content);
 
 
 router.get("/products", async (req, res) => {
 
+    return res.status(200).json(products);
 
 
 });
