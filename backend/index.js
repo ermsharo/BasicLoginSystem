@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 // const freeDict  = require("./routes/freeDict");
 
 
-// const db = require("./database/connection");
+const db = require("./database/connection");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const jsonParser = bodyParser.json();
