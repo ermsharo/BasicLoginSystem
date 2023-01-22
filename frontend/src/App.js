@@ -17,7 +17,7 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<Board />}></Route>
+            <Route path="/" element={<CreateUserPage />}></Route>
             <Route path="/create-user" element={<CreateUserPage />}></Route>
           </Routes>
         </BrowserRouter>

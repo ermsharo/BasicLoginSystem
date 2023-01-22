@@ -2,11 +2,9 @@ import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import { Grid } from "../../Styles/GridSystem";
 import Button from "@mui/material/Button";
-// import Logo from "../logo/logo";
 import React, { useState } from "react";
 import Feedback from "./../Feedback/FeedBack";
 import axios from "axios";
-// import { HeaderColor } from "./../../Styles/StyleFunctions";
 import { useNavigate } from "react-router-dom";
 
 const BoardBox = styled.div`
@@ -57,7 +55,7 @@ export default function CreateUser() {
     passwordCheck: "",
   });
   const [requestErrorAwnser, setRequestErrorAwnser] = useState(false);
-  const [requestAwnser, setRequestAwnser] = useState(false);
+  // const [requestAwnser, setRequestAwnser] = useState(false);
   const [validationErrors, setValidationErrors] = useState({
     isFormValid: true,
     errorArray: [],
@@ -120,7 +118,7 @@ export default function CreateUser() {
           formInputs,
         })
         .then((response) => {
-          setRequestAwnser(response.data);
+          // setRequestAwnser(response.data);
           navigate("/");
         })
         .catch((error) => {
@@ -133,7 +131,6 @@ export default function CreateUser() {
     <>
       <BoardBox>
         <LogoBox>
-          {/* <Logo color="#00008b" size="6vw" /> */}
         </LogoBox>
         <Grid>
           <FormBox>
@@ -172,7 +169,7 @@ export default function CreateUser() {
               onChange={handleChange}
             />
 
-            {validationErrors.errorArray.length != 0 && (
+            {validationErrors.errorArray.length !== 0 && (
               <Feedback
                 status={validationErrors.errorArray[0]}
                 success={false}
