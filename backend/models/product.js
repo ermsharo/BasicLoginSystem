@@ -1,22 +1,25 @@
-const Sequelize = require("sequelize");
-const database = require("./../connection");
-
-const Products = database.define("Product", {
-  id: {
-    type: Sequelize.INTEGER,
-    autoIncrement: true,
-    allowNull: false,
-    primaryKey: true,
-  },
-  name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  price: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-
-});
-
-module.exports = Products;
+'use strict';
+const {
+  Model
+} = require('sequelize');
+module.exports = (sequelize, DataTypes) => {
+  class Product extends Model {
+    /**
+     * Helper method for defining associations.
+     * This method is not a part of Sequelize lifecycle.
+     * The `models/index` file will call this method automatically.
+     */
+    static associate(models) {
+      // define association here
+    }
+  }
+  Product.init({
+    id: DataTypes.STRING,
+    name: DataTypes.STRING,
+    price: DataTypes.STRING
+  }, {
+    sequelize,
+    modelName: 'Product',
+  });
+  return Product;
+};

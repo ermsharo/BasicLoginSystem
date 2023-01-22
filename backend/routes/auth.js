@@ -2,10 +2,14 @@ const { Op } = require("sequelize");
 const express = require("express");
 const router = express.Router();
 const bcrypt = require("bcrypt");
+const User = require("../instances/userInstance");
+const crypto = require('crypto');
+
 require("dotenv-safe").config();
 
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
+
+
 
 router.post("/auth/singup", async (req, res) => {
   console.log("sing up")
@@ -27,6 +31,7 @@ router.post("/auth/singup", async (req, res) => {
     if (getEmailByEmailtext === null) {
       encryptedPassword = await bcrypt.hash(password, 10);
       const userCreated = await User.create({
+        id: crypto.randomBytes(16).toString('hex'),
         userName: user,
         email: email.toLowerCase(),
         password: encryptedPassword,
