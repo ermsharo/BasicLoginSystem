@@ -6,23 +6,21 @@ import React, { useState } from "react";
 import Feedback from "./../Feedback/FeedBack";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { isCreateUserFormValid } from "./../../Services/FormValidations";
 
 const BoardBox = styled.div`
-  padding-top: 32px;
   width: 100%;
-  padding-bottom: 32px;
+  font-family: "Varela Round", sans-serif;
+  font-weight: 400;
+  height: 100%;
 `;
 
-const FormBox = styled.div`
+const LoginBox = styled.div`
   padding-top: 32px;
-
   grid-column: 2/8;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   gap: 16px;
-
   @media (min-width: 992px) {
     grid-column: 3/7;
   }
@@ -33,6 +31,7 @@ const FormBox = styled.div`
   button {
     font-family: "Varela Round", sans-serif;
     font-weight: 700;
+
     border-radius: 20px;
     margin-top: 16px;
 
@@ -48,20 +47,24 @@ const LogoBox = styled.div`
   padding: 16px;
 `;
 
-export default function CreateUser() {
+const CreateAccountButton = styled.div`
+  font-family: "Varela Round", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 16px;
+  padding-left: 8px;
+  &:hover {
+    opacity: 0.7;
+  }
+`;
+
+export default function SingIn() {
   const [formInputs, setFormInputs] = useState({
-    user: "",
     email: "",
     password: "",
-    passwordCheck: "",
   });
 
   const [requestErrorAwnser, setRequestErrorAwnser] = useState(false);
-  const [requestAwnser, setRequestAwnser] = useState(false);
-  const [validationErrors, setValidationErrors] = useState({
-    isFormValid: true,
-    errorArray: [],
-  });
 
   const navigate = useNavigate();
 
@@ -73,37 +76,35 @@ export default function CreateUser() {
     });
   }
 
-  const createUser = async () => {
-    console.log("->", isCreateUserFormValid(formInputs));
-    if (isCreateUserFormValid(formInputs)) {
-      await axios
-        .post("http://localhost:5000/auth/singup", {
-          formInputs,
-        })
-        .then((response) => {
-          setRequestAwnser(response.data);
-          navigate("/");
-        })
-        .catch((error) => {
-          setRequestErrorAwnser(error.response.data);
-        });
-    }
+  const saveUserInfo = (id, token, user) => {
+    localStorage.setItem("id", id);
+    localStorage.setItem("user", user);
+    localStorage.setItem("token", token);
+    localStorage.setItem("logged", true);
+  };
+
+  const singIn = async () => {
+    await axios
+      .post("http://localhost:5000/auth/singin", {
+        formInputs,
+      })
+      .then((response) => {
+        setRequestErrorAwnser(false);
+        saveUserInfo(response.data.id, response.data.token, response.data.name);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.response.data);
+        setRequestErrorAwnser(error.response.data);
+      });
   };
 
   return (
     <>
       <BoardBox>
-        <LogoBox></LogoBox>
+        <LogoBox>{/* <Logo color={HeaderColor} size="6vw" /> */}</LogoBox>
         <Grid>
-          <FormBox>
-            <TextField
-              fullWidth
-              id="outlined-name"
-              label="User"
-              name="user"
-              value={formInputs.user}
-              onChange={handleChange}
-            />
+          <LoginBox>
             <TextField
               fullWidth
               id="outlined-name"
@@ -121,39 +122,30 @@ export default function CreateUser() {
               value={formInputs.password}
               onChange={handleChange}
             />
-            <TextField
-              type="password"
-              fullWidth
-              id="outlined-name"
-              label="Password check"
-              name="passwordCheck"
-              value={formInputs.passwordCheck}
-              onChange={handleChange}
-            />
-
-            {validationErrors.errorArray.length !== 0 && (
-              <Feedback
-                status={validationErrors.errorArray[0]}
-                success={false}
-                display={!validationErrors.isFormValid}
-              />
-            )}
-
             <Feedback
               status={requestErrorAwnser}
               success={false}
               display={requestErrorAwnser}
             />
+
             <Button
               onClick={() => {
-                createUser();
+                singIn();
               }}
               fullWidth
               variant="contained"
             >
-              Create user
+              Login
             </Button>
-          </FormBox>
+
+            <CreateAccountButton
+              onClick={() => {
+                navigate("create-account");
+              }}
+            >
+              Create account
+            </CreateAccountButton>
+          </LoginBox>
         </Grid>
       </BoardBox>
     </>

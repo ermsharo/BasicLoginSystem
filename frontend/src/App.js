@@ -7,6 +7,7 @@ import { Helmet } from "react-helmet";
 import styled from "styled-components";
 import Board from "./components/Board/Board";
 import CreateUserPage from "./components/CreateUserPage/CreateUserPage";
+import LoginPage from "./components/LoginPage/LoginPage";
 
 function App() {
   return (
@@ -17,7 +18,15 @@ function App() {
         <BrowserRouter>
           <Header />
           <Routes>
-            <Route path="/" element={<CreateUserPage />}></Route>
+            <Route
+              path="/"
+              element={
+                <>
+                  <CreateUserPage />
+                  <LoginPage />
+                </>
+              }
+            ></Route>
             <Route path="/create-user" element={<CreateUserPage />}></Route>
           </Routes>
         </BrowserRouter>
