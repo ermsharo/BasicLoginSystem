@@ -34,12 +34,14 @@ router.post("/auth/singup", async (req, res) => {
     } else {
       return res
         .status(400)
-        .send("Alredy exist a acoount with this email adrress");
+        .send("Alredy exist a account with this email adrress");
     }
   } else {
-    return res.status(400).send("Alredy exist a acoount with this username");
+    return res.status(400).send("Alredy exist a account with this username");
   }
 });
+
+
 
 router.post("/auth/singin", async (req, res) => {
 
