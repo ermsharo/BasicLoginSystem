@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const auth = require("./routes/auth");
+const products = require("./routes/products");
 
 const db = require("./connection");
 const cors = require("cors");
@@ -15,6 +16,8 @@ const app = express();
 const port = process.env.PORT;
 app.use(jsonParser);
 app.use(cors());
+
+
 app.get("/", (req, res) => {
     res.send({
         message: "Teste Nex Digital 🏅 ",
@@ -32,7 +35,7 @@ db.authenticate()
     });
 
 //Routes
-// app.use(authRoutes);
+app.use(authRoute);
 // app.use(entriesRoutes);
 // app.use(userRoutes);
 // app.use(freeDict);
