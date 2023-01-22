@@ -4,6 +4,13 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import styled from "styled-components";
+
+const CardBox = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+`;
 
 export default function ProductCard({name, description, image, price}) {
   return (
