@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import React, {  } from "react";
 import ProductCard from "../ProductCard/ProductCard";
 import GetProducts from "../../Services/GetProducts";
+import { useNavigate } from "react-router-dom";
 
 const DisplayArea = styled.div`
   padding-top: 32px;
@@ -18,11 +18,15 @@ const ProductsArea = styled.div`
 
 export default function Board() {
   //Just insert random products
+  const navigate = useNavigate();
 
   const { data, isLoading, isError } = GetProducts();
 
 
-  if (isError) return (<div>ERRO</div>)
+  if (isError) {
+    if (isError.auth === false) navigate("/login");
+    return <div>Something went wrong ...</div>;
+  }
 
   if (isLoading) return (<div>LOADING</div>)
 
@@ -37,7 +41,6 @@ export default function Board() {
       <DisplayArea>
         <ProductsArea>
           {data.map(function (item, index) {
-            console.log("test");
             return (
               <div key={index}>
                 <ProductCard name={item.title}
